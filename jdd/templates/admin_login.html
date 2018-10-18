@@ -1,0 +1,32 @@
+{% extends 'layout.html'%}
+{% block title%}
+Admin-Login
+{% endblock %}
+{% block body%}
+<div class="row">
+    <form class="col s12" method="POST" action="">
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <i class="material-icons prefix">adb</i>
+                <input id="name" type="text" class="validate" name="name" value="{{request.form.name}}">
+                <label for="name">name:</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <i class="material-icons prefix">lock</i>
+                <input id="password" type="password" class="validate" name="password" value="{{request.form.password}}">
+                <label for="password">password:</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <button class="btn waves-effect waves-light" type="submit" name="submit">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

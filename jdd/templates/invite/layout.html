@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+invite
+{% endblock %}
+
+{% block head %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static',filename='invite.css')}}">
+{% endblock%}
+
+{% block body%}
+
+    <div class="fixed-action-btn" style="bottom:66px;right:24px;" id='float_button'>
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+    </div>
+
+{% endblock %}
+
+{% block script%}
+<script>
+  $(document).ready(function () {
+    $('.fixed-action-btn').floatingActionButton();
+    $('.collapsible').collapsible();
+  })
+</script>
+{% endblock %}

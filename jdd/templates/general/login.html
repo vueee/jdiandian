@@ -1,0 +1,45 @@
+{% extends 'layout.html'%}
+{% block title%}
+Login
+{% endblock %}
+{% block body%}
+<div class="container">
+
+<div class="row">
+    {% from "_formhelpers.html" import render_field %}
+    <form class="col s12" method="POST" action="">
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <i class="material-icons prefix">email</i>
+                {{render_field(form.email,class='validate')}}
+                <label for="email">邮箱：</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <i class="material-icons prefix">lock</i>
+                {{render_field(form.password,class='validate')}}
+                <label for="password">密码：</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <label>
+                    <input type="checkbox" name="remember" value="{{True}}">
+                    <span>remember me!</span>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <button class="btn waves-effect waves-light" type="submit" name="submit">确认
+                    <i class="material-icons right">send</i>
+                </button>
+                <a class="btn waves-effect waves-light grey right" href="http://www.jdiandian.com/reset" >忘记密码？</a>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+{% endblock %}

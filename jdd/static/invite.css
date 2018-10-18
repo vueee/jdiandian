@@ -1,0 +1,11 @@
+.invite {
+    margin: .5rem 0 1rem 0;
+    overflow:hidden;
+    position: relative
+}
+
+.invite li {
+    line-height: 1.5rem;
+    padding: 5px;
+    margin: 0;
+}

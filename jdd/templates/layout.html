@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+{% block head %}
+<meta charset="utf-8">
+<title>{% block title %}welcome{% endblock %} | 今点点</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--Import materialize.css-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static',filename='app.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+{% endblock %}
+
+<body>
+
+    <header>
+        {% block nav %}
+        <!-- header navbar -->
+        <nav>
+            <div class="nav-wrapper skr-pink" id="navbar">
+                <a href="/" class="brand-logo"><img src="{{url_for('static',filename='images/jdd.png')}}" alt="Logo"
+                        style="width:250px;"></a>
+                <a href="#" data-target="side_navbar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    {% if current_user.is_authenticated %}
+                    <li><a href="/dashboard">用户中心</a></li>
+                    <li><a href="/logout">退出</a></li>
+                    {% else %}
+                    <li><a href="/register">注册</a></li>
+                    <li><a href="/login">登录</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        <ul class="sidenav skr-yellow" id="side_navbar">
+            {% if current_user.is_authenticated %}
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="{{ url_for('static',filename='images/purple.jpg') }}">
+                    </div>
+                    <a href="/dashboard/avatar"><img class="circle" src="https://jdiandian-1257713877.cos.ap-hongkong.myqcloud.com/{{current_user.get_id()}}/avatar.jpg"
+                            onerror="this.onerror='';src='/static/images/default_avatar.png'"></a>
+                    <a href="#name"><span class="white-text name">{{session['name']}}</span></a>
+                    <a href="#email"><span class="white-text email">{{session['email']}}</span></a>
+                </div>
+            </li>
+            <li><a href="/">首页</a></li>
+            <li><a href="/dashboard">用户中心</a></li>
+            <li><a href="/logout">退出</a></li>
+            {% else %}
+            <li><a href="/">首页</a></li>
+            <li><a href="/login">登录</a></li>
+            <li><a href="/register">注册</a></li>
+            {% endif %}
+        </ul>
+        {% endblock %}
+    </header>
+
+    <main>
+        {% block body %}
+        {% endblock %}
+    </main>
+
+    <!-- footer -->
+    {% block footer %}
+    <footer class="page-footer skr-red">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">新闻</h5>
+                    <p class="grey-text text-lighten-4" id="rss">更多功能，近期更新！敬请期待！</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">链接</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">top</a></li>
+                        <li><a class="grey-text text-lighten-3" href="https://www.ipyer.com">爱py客</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link </a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2018 Copyright 今点点
+                <a class="grey-text text-lighten-4 right" href="/help">帮助</a>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
+
+    <!--JavaScript golbal-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <!-- message management -->
+    {% if err %}
+    <script>
+        M.toast({ html: '{{ err }}', classes: 'card-panel red lighten-2' });
+    </script>
+    {% endif %}
+
+    {% if msg %}
+    <script>
+        M.toast({ html: '{{ msg }}', classes: 'card-panel teal lighten-2' });
+    </script>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category,message in messages %}
+    {% if category == 'error' %}
+    <script>
+        M.toast({ html: '{{ message }}', classes: 'card-panel red lighten-2', displayLength: 6000 });
+    </script>
+    {% else %}
+    <script>
+        M.toast({ html: '{{ message }}', classes: 'card-panel blue lighten-2', displayLength: 6000 });
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <script src="{{ url_for('static',filename='app.js') }}"></script>
+
+    <!-- block scirpt -->
+    {% block script %}
+    {% endblock %}
+
+</body>
+
+</html>

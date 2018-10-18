@@ -1,0 +1,61 @@
+{% extends 'layout.html'%}
+{% block title%}
+Register
+{% endblock %}
+{% block body%}
+<div class="container">
+
+    <div class="row">
+        {% from "_formhelpers.html" import render_field %}
+        <form class="col s12" action="" method="POST">
+            <div class="row">
+                <div class="input-field col s12 m6 offset-m3">
+                    <i class="material-icons prefix">account_circle</i>
+                    {{render_field(form.name,class='validate')}}
+                    <label for="name">昵称：</label>
+                    <span class="helper-text" data-success="welcome new member! enjoy yourself!"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 offset-m3">
+                    <i class="material-icons prefix">email</i>
+                    {{render_field(form.email,class='validate')}}
+                    <label for="email">邮箱：</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 offset-m3">
+                    <i class="material-icons prefix">lock</i>
+                    {{render_field(form.password,class='validate')}}
+                    <label for="password">密码：</label>
+                    <span class="helper-text" data-success="for your security,better have 3 type inputs."></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 offset-m3">
+                    <i class="material-icons prefix">lock</i>
+                    {{render_field(form.confirm,class='validate')}}
+                    <label for="confirm">确认密码：</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="switch col s12 m6 offset-m3">
+                    <label>
+                        {{render_field(form.accept,class='validate')}}
+                        <span class="lever"></span>
+                        <span class="grey-text">同意网站条款。</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 offset-m3">
+                    <button class="btn waves-effect waves-light" type="submit" name="submit">确认
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}

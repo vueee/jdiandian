@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+用户中心
+{% endblock %}
+
+{% block head %}
+{{super()}}
+<style>
+    @media screen and (min-width:769px){
+        #sideNav {
+            transform:translateX(0px);
+        }
+
+        main {
+            margin-left:300px;
+        }
+    }
+
+</style>
+{% endblock %}
+
+{% block nav %}
+
+    <nav class="hide-on-med-and-up">
+        <div class="nav-wrapper skr-pink " id="navbar">
+            <a href="/" class="brand-logo center"><img src="{{url_for('static',filename='images/jdd.png')}}" alt="Logo" style="width:250px;"></a>
+            <a href="#" data-target="side_navbar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+  
+    <ul class="sidenav skr-yellow " id="side_navbar">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                     <img src="{{ url_for('static',filename='images/purple.jpg') }}">
+                </div>
+                <a href="/dashboard/avatar"><img class="circle" src="https://jdiandian-1257713877.cos.ap-hongkong.myqcloud.com/{{current_user.get_id()}}/avatar.jpg"
+                        onerror="this.onerror='';src='/static/images/default_avatar.png'"></a>
+                <a href="#name"><span class="white-text name">{{session['name']}}</span></a>
+                <a href="#email"><span class="white-text email">{{session['email']}}</span></a>
+            </div>
+        </li>
+        <li><a href="/">首页</a></li>
+        <li><a href="/dashboard/donate">上传赞助图</a></li>
+        <li><a href="/dashboard/info">修改用户信息</a></li>
+        <li><a href="/logout">退出登录</a></li>
+    </ul>
+
+    <ul class="sidenav skr-yellow" id="sideNav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="{{ url_for('static',filename='images/purple.jpg') }}">
+                </div>
+                <a href="/dashboard/avatar"><img class="circle" src="https://jdiandian-1257713877.cos.ap-hongkong.myqcloud.com/{{current_user.get_id()}}/avatar.jpg"
+                        onerror="this.onerror='';src='/static/images/default_avatar.png'"></a>
+                <a href="#name"><span class="white-text name">{{session['name']}}</span></a>
+                <a href="#email"><span class="white-text email">{{session['email']}}</span></a>
+            </div>
+        </li>
+        <li><a href="/">首页</a></li>
+        <li><a href="/dashboard/donate">上传赞助图</a></li>
+        <li><a href="/dashboard/info">修改用户信息</a></li>
+        <li><a href="/logout">退出登录</a></li>
+    </ul>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+<!-- {% block script%}
+<script>
+        $(document).ready(function () {
+          $('.fixed-action-btn').floatingActionButton();
+    
+        })
+</script>
+{% endblock %} -->

@@ -1,0 +1,79 @@
+{% extends 'post/layout.html' %}
+{% block title %}
+<span>my post</span>
+{% endblock %}
+
+{% block body %}
+{{super()}}
+<div class="container">
+<div class="row">
+  <div class="col s12 m10 posts">
+    {% for post in posts %}
+    <ul class="collapsible post">
+      <li>
+
+        <div class="collapsible-header " style="display:block;">
+          <i class="material-icons">filter_drama</i>
+          {{post.title}}
+
+          <span class="hide edit-btns right">
+            <a class="right button delete-btn" data-href="{{ url_for('.delete_post', post_id=post.id) }}">
+              <i class="material-icons small-icon left">clear</i>
+            </a>
+            <a class="right button edit-btn" href="{{ url_for('.edit_post', post_id = post.id) }}">
+              <i class="material-icons small-icon left">mode_edit</i>
+            </a>
+          </span>
+
+        </div>
+
+        <div class="collapsible-body">
+          <span>{{post.summary}}</span>
+          <span> <a href="{{ url_for('.show_post', post_id=post.id) }}">readmore ....</a> </span>
+          <!-- 需要添加其它如新增评论 点赞数 浏览数等给作者定制的选项 -->
+        </div>
+
+      </li>
+    </ul>
+    {% endfor %}
+  </div>
+</div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+{{super()}}
+<script>
+  $(document).ready(function () {
+
+    // hide and show edit buttons
+    $(document).on('mouseenter', '.post', function () {
+      $(this).find('.edit-btns').removeClass('hide');
+    })
+
+      .on('mouseleave', '.post', function () {
+        $(this).find('.edit-btns').addClass('hide');
+      })
+
+    // delete post
+    $(document).on('click', '.delete-btn', function () {
+      var $this = $(this)
+      var $post = $(this).closest('ul')
+      if(confirm('Are you sure??')){
+        $.ajax({
+          type: 'DELETE',
+          url: $this.data('href'),
+          success: function (data) {
+            $post.remove();
+            M.toast({ html: "post removed!" });
+          }
+        });
+      }else{
+        return false
+      }
+    });
+
+  })
+</script>
+{% endblock %}

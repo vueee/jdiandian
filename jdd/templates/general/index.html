@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="container">
+
+  <div class="posts">
+    {% for post in posts %}
+    <ul class="collapsible popout">
+      <li>
+
+        <div class="collapsible-header">
+          <i class="material-icons">filter_drama</i>
+          {{post.title}}
+        </div>
+
+        <div class="collapsible-body">
+          <span>{{post.summary}}</span>
+          <span> <a href="{{ url_for('post.show_post', post_id=post.id) }}" class="btn skr-yellow right">更多...</a> </span>
+        </div>
+
+      </li>
+    </ul>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="fixed-action-btn" style="bottom:66px;right:24px;">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating lime tooltipped" data-position="top" data-tooltip="post" href=" {{url_for('post.index')}} "><i
+          class="material-icons">insert_chart</i></a></li>
+    <li><a class="btn-floating blue tooltipped" data-position="top" data-tooltip="date" href=" / "><i class="material-icons">date_range</i></a></li>
+    <li><a class="btn-floating blue tooltipped" data-position="top" data-tooltip="funny thing" href=" / "><i class="material-icons">linked_camera</i></a></li>
+    <li><a class="btn-floating green darken-1 tooltipped" data-position="top" data-tooltip="back top" href=" /"><i
+          class="material-icons">publish</i></a></li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  $(document).ready(function () {
+    $('.fixed-action-btn').floatingActionButton({
+      direction: 'left',
+    });
+
+  })
+</script>
+{% endblock %}

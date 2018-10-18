@@ -1,0 +1,56 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.button {
+    cursor: pointer;
+    text-transform: none;
+}
+
+.skr-yellow {
+    background-color:rgb(246,221,191)
+}
+
+.skr-grey {
+    background-color: rgb(174,163,157);
+}
+
+.skr-red {
+    background-color: rgb(220,99,108);
+}
+
+.skr-pink {
+    background-color: rgb(229,161,160);
+}
+
+.skr-rose {
+    background-color: rgb(44,6,5);
+}
+
+
+.skr-yellow-color {
+    color:rgb(246,221,191)
+}
+
+.skr-grey-color {
+    color: rgb(174,163,157);
+}
+
+.skr-red-color {
+    color: rgb(220,99,108);
+}
+
+.skr-pink-color {
+    color: rgb(229,161,160);
+}
+
+.skr-rose-color {
+    color: rgb(44,6,5);
+}
+

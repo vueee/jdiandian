@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+{% block title %}
+help!
+{% endblock %}
+{% block body %}
+<div class="divider red" style="height:10px"></div>
+<div class="container">
+
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs z-depth-2">
+        <li class="tab col s3"><a href="#test1">网站介绍</a></li>
+        <li class="tab col s3"><a href="#test2">声明</a></li>
+        <li class="tab col s3"><a class="active" href="#test3">插入图片</a></li>
+        <li class="tab col s3"><a href="#test4">联系我</a></li>
+      </ul>
+    </div>
+    <div id="test1" class="col s12">Hello, friend!</div>
+    <div id="test2" class="col s12">
+      <ul>
+        <li>1. 不能有违反法律法规的行为。</li>
+        <li>2. 不应该有违反道德标准的行为。</li>
+        <li>3. 本质上，每个用户都是平等的。所有不能强迫别人接受你的观点。</li>
+      </ul>
+      <p>今点点对上述用户行为不负责任。若侵犯了您的权力，请及时联系本网站。本网站会以最快的速度回复您的答复。</p>
+    </div>
+
+    <div id="test3" class="col s12">
+      <h5>怎么插入图片在文章或者其它地方？</h5>
+      <p>本站暂时不提供上传服务，网上供用户上传图片的地方很多，像。。。</p>
+
+      <p>给大家介绍一个很容易操作的网站 imgBB ，img哔哔很好记吧。</p>
+
+      <p>网站不需要登录就可以上传图片，生成外部链接供用户使用。</p>
+
+      <p>首先打开 网站点击上传：</p>
+      <img src="https://image.ibb.co/iDkRye/imgbb1.png" alt="help1" srcset="" class="responsive-img z-depth-2">
+      <p>选择本地照片，可以在保存前编辑图片：</p>
+      <img src="https://image.ibb.co/cXUmye/imgbb2.png" alt="help1" srcset="" class="responsive-img z-depth-2">
+      <p>上传完毕后点保存，可以察看嵌入代码。有各种样式供用户选择，登录后更多：3</p>
+      <img src="https://image.ibb.co/iN1zJe/imgbb3.png" alt="help1" srcset="" class="responsive-img z-depth-2">
+      <p>不登录的话选择 HTML详细链接 图片地址在里面：</p>
+      <img src="https://image.ibb.co/hDMc4K/imgbb4.png" alt="help1" srcset="" class="responsive-img z-depth-2">
+      <p>登录的话直接选择查看源文件链接，可以直接点复制：</p>
+      <img src="https://image.ibb.co/my95PK/imgbb5.png" alt="help1" srcset="" class="responsive-img z-depth-2">
+      <p>按您的需要，若在文本编辑状态下，在编辑处直接黏贴后用鼠标选中整个链接:</p>
+      <img src="https://image.ibb.co/ceEuJe/imgbb6.png" alt="help1" srcset="" class="responsive-img z-depth-2">
+      <p>就会出现美美的图片了 ：3</p>
+
+      <p> Markdown的话，相信会用markdown的大大们不需要我指点迷津了</p>
+
+    </div>
+    <div id="test4" class="col s12"> You can contact me with email: &nbsp;<a href="mailto:qinuo.traveler@gmail.com">qinuo</a></div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  $(document).ready(function () {
+    $('.tabs').tabs();
+  });
+
+</script>
+{% endblock %}

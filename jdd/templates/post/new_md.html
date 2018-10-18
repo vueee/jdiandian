@@ -1,0 +1,93 @@
+{% extends 'post/layout.html' %}
+{% block title %}
+New post
+{% endblock %}
+
+{% block head %}
+{{super()}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<style>
+    #article_body {
+        min-height: 300px;
+        max-width: 100vw;
+        overflow: auto;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+{{super()}}
+<div class="container">
+<div class="row">
+    {% from "_formhelpers.html" import render_field %}
+    <form action="" method="post">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">class</i>
+                {{render_field(form.name,class='autocomplete')}}
+                <label for="name">类别:</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">photo</i>
+                {{render_field(form.cover,class='validate')}}
+                <label for="cover">首图，请直接填写链接：</label>
+                <span class="helper-text" data-success="input the http/https link directly" ></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">title</i>
+                {{render_field(form.title,class='validate')}}
+                <label for="title">标题：</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">straighten</i>
+                {{render_field(form.summary,class='validate')}}
+                <label for="summary">概述：</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">attachment</i>
+                {{render_field(form.tags,class='validate')}}
+                <label for="tags">标签，多个请用';'分开：</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 card-panel light-blue lighten-5 " id="article_body" >
+                {{render_field(form.body,class='materialize-textarea article-body')}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <button class="btn waves-effect waves-light" type="submit" name="submit">保存
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+{{super()}}
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+    var simplemde = new SimpleMDE({ 
+        element: $(".article-body")[0],
+        autosave: {
+            enabled: true,
+            uniqueId: "MyUniqueID",
+            delay: 1000,
+        },
+        placeholder: "在这里写...",
+     });
+     $("#body").value = simplemde.value();
+</script>
+{% endblock%}

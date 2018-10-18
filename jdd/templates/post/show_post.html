@@ -1,0 +1,177 @@
+<!-- static page -->
+{% extends 'post/layout.html' %}
+
+{% block head %}
+{{super()}}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/styles/an-old-hope.min.css">
+<link rel="stylesheet" href=" {{ url_for('static',filename='post.css') }}" />
+{% endblock %}
+
+{% block title %}
+{{post.title}}
+{% endblock %}
+
+    
+{% block nav %}
+    <!-- header navbar -->
+    <header>
+        <nav>
+            <div class="nav-wrapper skr-pink" id="navbar">
+                <a href="/" class="brand-logo center">&nbsp;今点点</a>
+                <a href="#" data-target="side_navbar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+
+        <ul class="sidenav" id="side_navbar">
+            <li><a href="/">首页</a></li>
+            <li><a href="/post">文章</a></li>
+        </ul>
+    </header>
+{% endblock %}
+
+{% block body %}
+{{super()}}
+<div class="container">
+
+{% if post %}
+
+<!-- breadcrum -->
+<nav>
+  <div class="nav-wrapper bread-nav skr-red">
+    <div class="col s12">
+      <a href="/" style="margin-left:15px;" class="breadcrumb">首页</a>
+      <a href="/post" class="breadcrumb">文章</a>
+      <a href="#!" class="breadcrumb">看这里！</a>
+    </div>
+  </div>
+</nav>
+<div class="divider"></div>
+
+<!-- cover picture -->
+<div class="section cover">
+  {% if post.cover%}
+  <img src="{{post.cover}}" class="responsive-img" onerror="noCover();" alt="post-cover" />
+  {% endif %}
+</div>
+
+<!-- title and views date -->
+<div class="secion article-header">
+  <div class="center">
+    <h4>{{post.title}}</h4>
+    <p><span class="grey-text text-darken-2">{{post.date}}</span></p>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- author (ajax when click )info and subscribe donate -->
+<div class="section author">
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header" id="author" style="display:block;">
+        <div class="row" style="margin-bottom:0;">
+          <div class="col m4">
+            <img class="circle " src="" alt="author_avatar" id="avatar"  onerror="this.onerror='';src='/static/images/default-avatar.jpg'" />
+            <a href="/user/{{post.author_id}}">
+              <div class="grey-text name" id="author_name">{{post.author}}</div>
+            </a>
+          </div>
+          <div class="col m8">
+            <div class="subscribe right">
+              <button class="btn btn-flat skr-pink" id="donate">赞助</button>
+              <button  class="btn btn-flat white-text skr-grey" id="subscribe">订阅</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible-body" id="author_info">
+        <p>作者还没在这里留下足迹:3</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- summary -->
+<div class="section summary card-panel skr-yellow">
+  <span>{{post.summary}}</span>
+</div>
+
+<!-- article body -->
+<div class="secion article-body" style="overflow:auto">
+  <a id="flow-toggle" class="btn waves-effect waves-light skr-grey">放大字体</a>
+  <div id="flow-body" class="article-content">
+    {% if post.post_type == 'text' %}
+    {{post_body.body|safe}}
+    {% elif post.post_type == 'md' %}
+    {% filter markdown %}
+    {{post_body.body}}
+    {% endfilter %}
+    {% endif %}
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- comments  praise stuff (ajax when click)-->
+<div class="section comment">
+  <div class="row  ">
+    <form class="col s12 new_comment">
+
+      <div class="row">
+        <div class="input-field col s9 m3">
+
+          <div class="row">
+            <div class="col s4 ">
+              <label>
+                <input name="praise" type="radio" value="up" />
+                <span><i class="material-icons ">thumb_up</i></span>
+              </label>
+            </div>
+            <div class="col s4 offset-2">
+              <label>
+                <input name="praise" type="radio" value="down" />
+                <span><i class="material-icons ">thumb_down</i></span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="input-field col s9 m6">
+          <textarea id="comment_area" class="materialize-textarea" data-length="120"></textarea>
+          <label for="comment_area">new comment</label>
+        </div>
+
+        <div class="input-field col s3 m3">
+          <button id="comment_submit" class="btn-small btn-flat waves-effect waves-light" type="submit" name="submint" >Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <ul class="collection comments" id="comments">
+
+    <!-- <li class="collection-item avatar">
+      <img class="comment-avatar circle" src="xxx" onerror="this.onerror='';src='/static/images/default-avatar.jpg'"/>
+      <p id=comment_body>xxx</p>
+      <a href="#!" class="secondary-content"><i class="material-icons">thumb_xx</i></a>
+    </li> -->
+
+  </ul>
+</div>
+
+<!-- hiden info -->
+<div id="post_info" class="hide" style="visibility:hidden" data-id="{{post.id}}" data-uid="{{post.author_id}}"
+  data-author="{{post.author}}" data-title="{{post.title}}"></div>
+
+{% endif %}
+</div>
+{% endblock %}
+
+{% block script %}
+{{super()}}
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="{{url_for('static',filename='post.js')}}"></script>
+{% endblock %}

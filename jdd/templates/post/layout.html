@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+post
+{% endblock %}
+
+{% block body%}
+<div class="fixed-action-btn" style="bottom:66px;right:24px;" id='float_button'>
+        <a class="btn-floating btn-large red">
+          <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+          <li><a class="btn-floating lime tooltipped" data-position="left" data-tooltip="view all mine" href=" {{url_for('post.index')}} "><i class="material-icons">visibility</i></a></li>
+          <li><a class="btn-floating blue tooltipped" data-position="left" data-tooltip="normal text" href=" {{url_for('post.new_text')}} "><i class="material-icons">text_format</i></a></li>
+          <li><a class="btn-floating green darken-1 tooltipped" data-position="left" data-tooltip="markdown" href=" {{url_for('post.new_md')}} "><i class="material-icons">code</i></a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block script%}
+<script>
+        $(document).ready(function () {
+          $('.fixed-action-btn').floatingActionButton();
+    
+        })
+</script>
+{% endblock %}
