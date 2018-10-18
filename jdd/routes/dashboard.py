@@ -17,11 +17,11 @@ mod = Blueprint('dashboard', __name__)
 logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 secret_id = ''     
 secret_key = ''     
-region = 'ap-hongkong'    
+region = ''    
 token = None   
 config = CosConfig(Region=region, SecretId=secret_id, SecretKey=secret_key, Token=token)  
 client = CosS3Client(config)
-# response = client.upload_file(Bucket='jdiandian-1257713877', LocalFilePath= file_path, Key=str(user_id) +'/'+ file_name, PartSize=10, MAXThread=10)
+# response = client.upload_file(Bucket='jdiandian', LocalFilePath= file_path, Key=str(user_id) +'/'+ file_name, PartSize=10, MAXThread=10)
 
 @mod.route('/')
 @login_required
@@ -77,7 +77,7 @@ def upload_avatar():
         if os.path.exists(avatar_path+avatar_file_name):
             os.remove(avatar_path+avatar_file_name)
         s = avatars.save(f,name=avatar_file_name)
-        response = client.upload_file(Bucket='jdiandian-1257713877', LocalFilePath= avatar_path+avatar_file_name, Key=str(uid) +'/avatar.jpg', PartSize=10, MAXThread=10)
+        response = client.upload_file(Bucket='jdiandian', LocalFilePath= avatar_path+avatar_file_name, Key=str(uid) +'/avatar.jpg', PartSize=10, MAXThread=10)
         flash(u'头像已更新')
     return render_template('dashboard/avatar.html')
 
@@ -94,7 +94,7 @@ def upload_donate():
         if os.path.exists(donate_path+donate_file_name):
             os.remove(donate_path+donate_file_name)
         s = donates.save(f,name=donate_file_name)
-        response = client.upload_file(Bucket='jdiandian-1257713877', LocalFilePath= donate_path+donate_file_name, Key=str(uid) +'/donate.jpg', PartSize=10, MAXThread=10)
+        response = client.upload_file(Bucket='jdiandian', LocalFilePath= donate_path+donate_file_name, Key=str(uid) +'/donate.jpg', PartSize=10, MAXThread=10)
         flash(u'图片已更新')
     return render_template('dashboard/donate.html')
 
