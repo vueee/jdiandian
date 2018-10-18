@@ -15,8 +15,8 @@ mod = Blueprint('dashboard', __name__)
 
 # upload to cos
 logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-secret_id = 'AKIDd8Sin6KBSckkkZse1IOJ2b4Sfo49O4va'     
-secret_key = 'eDcqunYBd0CKNF1mRNBrT2Uo152rncJt'     
+secret_id = ''     
+secret_key = ''     
 region = 'ap-hongkong'    
 token = None   
 config = CosConfig(Region=region, SecretId=secret_id, SecretKey=secret_key, Token=token)  
